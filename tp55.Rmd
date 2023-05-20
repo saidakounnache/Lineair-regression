@@ -1,0 +1,160 @@
+---
+title: "Kounnache Saida"
+output:
+  html_document:
+    df_print: paged
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+df=read.csv('EXO1.csv')
+ds<-lm(Y ~ X_1 ,data=df)
+summary(ds)
+dk<-lm(Y ~ X_2,data=df )
+summary(dk)
+dg<-lm(Y ~ X_1+X_2,data=df )
+summary(dg)
+```
+## pourcentage de variation
+Pour ds:
+69.03%
+
+
+R2Y
+;X1 =
+SCreg
+SCtot
+=
+980; 64
+1420; 67
+= 0; 6903:
+
+
+Pour dk:
+45.3%
+
+
+Pour dg:
+84.81%
+
+## Tester
+```{r}
+shapiro.test(residuals(dg))
+```
+## Calculons la statistique du test de Fisher observée qui est égale à :
+Fobs =SCreg=ddl/SCres=ddl=(1204,86/2)/(215,81/(12-2-1 = 9)=25,123:
+
+Le quantile de loi de Fisher critique lu dans la table des quantiles de la loi de
+Fisher à 95% est égal à :
+
+Fc;2;9 = 4,256495
+
+La statistique du test de Fisher observée est plus grande que le quantile
+de loi de Fisher critique. Donc nous sommes dans la zone de rejet de l’hypothèse
+nulle H0. Donc nous décidons de refuser l’hypothèse nulle H0 et par conséquent
+d’accepter l’hypothèse alternative H1, c’est-à-dire :
+
+quelque soit j = 1; ou 2; Bj n'egale pas 0
+
+## intérvalle de confiance
+```{r}
+confint(ds)
+confint(dk)
+confint(dg)
+```
+## Q5
+La régression est significative entre la résistance à la rupture et l’épaisseur
+du matériau si le test de Student qui teste si 1 = 0 n’est pas vérifié.
+Calculons la statistique du test de Student observée :
+tobs = 6,036/1,279= 4,721
+
+Le quantile de la loi de Student critique lu dans une table des quantiles de la loi de Student à 95% est égal à :
+               tc;95% = 2,228
+
+La statistique du test de Student observée est plus grande que le quantile de
+la loi de Student critique. Par conséquent nous sommes dans la zone de rejet
+de l’hypothèse nulle H0. Donc nous décidons de refuser l’hypothèse nulle H0 et
+par conséquent d’accepter l’hypothèse alternative H1. Donc la régression est
+significative entre la résistance à la rupture et l’épaisseur du matériau.
+```{r}
+summary(ds)
+```
+Cette pvaleur est égale à 0.000816, qui est inférieur à 5%. Donc même conclusion
+qu’en faisant les calculs à la main précédents.
+
+## Q6
+```{r}
+predict(dg,data.frame(X_1 = 4,X_2 = 3.8),se.fit=TRUE)
+```
+```{r}
+predict(dg,data.frame(X_1 = 4,X_2 = 3.4),se.fit=TRUE)
+```
+```{r}
+predict(dg,data.frame(X_1 = 4,X_2 = 2.9),se.fit=TRUE)
+```
+## Q7
+```{r}
+predict(dg,data.frame(X_1 = 4,X_2 = 3.8),interval="confidence")
+```
+# EX02
+```{r}
+ex02=read.csv('EXO2.csv')
+```
+## Question 1
+```{r}
+s<-lm(Y ~ X_1 ,data=ex02)
+summary(s)
+```
+```{r}
+shapiro.test(residuals(s))
+```
+## Question 2
+```{r}
+g<-lm(Y ~ X_1+X_2,data=ex02 )
+summary(g)
+```
+Alos l’équation de la régression linéaire multiple de Y sur X1 et X2 est :
+
+Y= 35.055464 +0.07895\times X_1 + 0.47073\times X_2
+
+## Question 3:
+
+L’hypothèse nulle
+H0 :  = 0
+contre l’hypothèse alternative
+H1 : = 0:
+Calculons la statistique du test de Fisher observée qui est égale à :
+Fobs =SCreg=ddl/SCres=ddl=(190,232/1)/571,723=(22-2-1 = 19)= 6,332
+Le quantile de la loi de Fisher critique lu dans la table des quantiles de la loi de
+Fisher à 95% est égal à :
+Fc;1;19 = 4; 38075:
+
+## Question 4
+```{r}
+k<-lm(Y ~ X_1+X_2+X_3,data=ex02 )
+summary(k)
+```
+## question 5
+```{r}
+confint(g)
+```
+## question 6
+```{r}
+predict(dg,data.frame(X_1 = 221,X_2 = 39, X_3=7),interval="confidence")
+```
+## quetion 8
+```{r}
+h<-lm(X_1 ~ X_2+X_3,data=ex02 )
+summary(h)
+```
+
+## q9
+```{r}
+b<-lm(X_1 ~ X_3,data=ex02 )
+summary(b)
+confint(b)
+```
+
