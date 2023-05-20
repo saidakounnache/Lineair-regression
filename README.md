@@ -5,7 +5,7 @@ On dispose d’un jeu de données sur les caractéristiques d’un matériau. le
 
 ## 1 Charger le jeu de données
 On considère les 3 modèles suivant: Y~X1,
-Y~X2 et Y~X1+X2
+Y ~ X2 et Y ~ X1+X2
 
 ## 2)
 Quel pourcentage de variation dans la résistance à la rupture est expliqué par chacune des régressions ?
